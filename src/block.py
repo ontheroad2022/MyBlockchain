@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from transaction import Transaction
 import json
 import dataclasses as dc
 import hashlib

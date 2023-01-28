@@ -1,7 +1,9 @@
-import BlockChain
-import Block
+from blockchain import BlockChain
+from block import Block
+from transaction import Transaction
 from typing import List
 from dataclasses import dataclass
+import multiprocessing as mp
 import json
 
 class Network:
