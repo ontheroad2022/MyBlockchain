@@ -1,11 +1,15 @@
+from transaction import Transaction
+from dataclasses import dataclass
+
 class Wallet:
     def __init__(self, network, nodes=None):
-        key=RSA.generate(1024)
-        self.private_key = decode_key(key)
-        self.address = decode_key(key.publickey())
+        # key=RSA.generate(1024)
+        # self.private_key = decode_key(key)
+        # self.address = decode_key(key.publickey())
+        self.address = nodes #可読性のためにaddressにnodes（uuidのリスト）を設定する 
         self.network=network
         self.nodes=nodes or []
-    
+
     def sign_transaction(self, transaction):
         signer=PKCS1_v1_5.new(encode_key(self.private_key))
         h=SHA.new(transaction.str_data().encode())
@@ -13,8 +17,9 @@ class Wallet:
     
     def send(self, receiver_address, value):
         transaction=Transaction(self.address, receiver_address, value)
-        self.broadcast(self.sign_transaction(transaction))
-    
+        # self.broadcast(self.sign_transaction(transaction))
+        self.broadcast(transaction)
+
     def broadcast(self, transaction):
         for uuid in self.nodes:
             self.network.post_transaction(transaction, uuid)

@@ -1,6 +1,8 @@
 import BlockChain
 import Block
 from typing import List
+from dataclasses import dataclass
+import json
 
 class Network:
     def __init__(self, neighbours=()):
