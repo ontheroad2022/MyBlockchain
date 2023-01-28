@@ -1,6 +1,7 @@
 import json
 import network
 import wallet
+import collections
 
 class Smartcontract:
 
@@ -15,7 +16,6 @@ class Smartcontract:
                 transactions = json.loads(chain).get('transactions')
                 for t in transactions:
                     history.append(t)  
-
         return history             
 
     def get_current_state(self, uuid='the_leader_node'):
@@ -27,8 +27,7 @@ class Smartcontract:
                     self.state["receiver_address"] = d_operand["receiver_address"]
                     self.state["reserved"] = 1
             elif d_operand['value']=='cancel':
-                if self.state["reserved"]:
-                    if ((self.state["sender_address"]==d_operand["sender_address"])):
+                if (self.state['reserved'] and (collections.Counter(self.state['sender_address']) == collections.Counter(d_operand["sender_address"]))):
                             self.state["sender_address"] = None
                             self.state["receiver_address"] = None
                             self.state["reserved"] = 0
@@ -36,9 +35,7 @@ class Smartcontract:
 
     def cancel_reservation(self, s):
         self.state = self.get_current_state('the_leader_node')
-        if self.state['reserved'] and (self.state['sender_address'] == [s.address]):
-            # alice.send(bob.address, 'cancel')      
-            s.send([None], 'cancel')   
+        if (self.state['reserved'] and (collections.Counter(self.state['sender_address']) == collections.Counter(s.address))):
             s.send([None], 'cancel')
             return True
         return False
@@ -46,7 +43,6 @@ class Smartcontract:
     def make_a_reservation(self, s):
         self.state = self.get_current_state('the_leader_node')
         if not self.state['reserved']:
-            # alice.send(bob.address, 'reservation')     
             s.send([None], 'reservation')         
             return True
         return False
