@@ -60,7 +60,6 @@ class Node:
                 # Longest valid chain is authoritative
                 authoritative_chain=deepcopy(chain)
         self.chain=authoritative_chain 
-        # self.chain=deepcopy(self.network.get_chain('the_leader_node')) 
         return self.chain is not authoritative_chain
         
     @staticmethod
@@ -77,8 +76,6 @@ class Node:
     
     def verify_chain(self, chain):
         for i in range(len(chain)-1, 0, -1):
-            # if not self.verify_block(chain[i]):
-            #     return False
             if chain[i-1].hash() != chain[i].previous_hash:
                 return False
         return True
