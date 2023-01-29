@@ -18,7 +18,7 @@ class Smartcontract:
                     history.append(t)  
         return history             
 
-    def get_current_state(self, uuid='the_leader_node'):
+    def get_current_state(self, uuid):
         for operand in self.get_history_of_transactions_by_uuid(uuid):
             d_operand = json.loads(operand) #convert to a dictionary
             if d_operand['value']=='reservation':
@@ -34,14 +34,14 @@ class Smartcontract:
         return self.state
 
     def cancel_reservation(self, s):
-        self.state = self.get_current_state(s.address)
+        self.state = self.get_current_state(s.address[0])
         if (self.state['reserved'] and (collections.Counter(self.state['sender_address']) == collections.Counter(s.address))):
             s.send([None], 'cancel')
             return True
         return False
 
     def make_a_reservation(self, s):
-        self.state = self.get_current_state(s.address)
+        self.state = self.get_current_state(s.address[0])
         if not self.state['reserved']:
             s.send([None], 'reservation')         
             return True
