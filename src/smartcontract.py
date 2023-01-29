@@ -34,14 +34,14 @@ class Smartcontract:
         return self.state
 
     def cancel_reservation(self, s):
-        self.state = self.get_current_state('the_leader_node')
+        self.state = self.get_current_state(s.address)
         if (self.state['reserved'] and (collections.Counter(self.state['sender_address']) == collections.Counter(s.address))):
             s.send([None], 'cancel')
             return True
         return False
 
     def make_a_reservation(self, s):
-        self.state = self.get_current_state('the_leader_node')
+        self.state = self.get_current_state(s.address)
         if not self.state['reserved']:
             s.send([None], 'reservation')         
             return True
