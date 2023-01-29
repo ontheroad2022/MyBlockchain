@@ -2,12 +2,6 @@ from dataclasses import dataclass
 import json
 import dataclasses as dc
 
-# @dataclass
-# class Transaction:
-#     sender_address: int
-#     receiver_address: int
-#     value: float   
-
 @dataclass
 class Transaction:
     sender_address: str
