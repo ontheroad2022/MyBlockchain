@@ -9,7 +9,6 @@ class Smartcontract:
         self.state = {"sender_address": None, "receiver_address": None, "reserved": 0}
         self.network = network
 
-    #トランザクションの履歴を取得する
     def get_history_of_transactions_by_uuid(self, uuid):
         history = []
         for chain in json.loads(self.network.get_chain(uuid).json_dumps()):
