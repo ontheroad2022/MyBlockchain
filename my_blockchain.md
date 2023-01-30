@@ -115,7 +115,7 @@ network.shutdown()
 
 
 ```python
-genesis=Block(time(), (), "0")
+genesis=Block(time(), (), "genesis")
 network=Network()
 ```
 
@@ -129,12 +129,12 @@ nodes=['the_leader_node', 'the_blue_sky', 'white_noise', 'yellow_submarine', 'gr
 ```
 
 ## ネットワークの形状を定義する
-1. ネットワークの形状として、序列を持つ結合を選択する事が私たちの目的遂行のために重要です
-    - リーダーノードにおけるチェーンは常に全ノードにおける新たなブロックの生成を取り込みます
-        - そのためリーダーノードのチェーンは常に最も長いチェーンの１つとなります
-    - 全てのノードが最も長いチェーンに基づいてアップデートされます
+- ネットワークの形状として、序列を持つ結合を選択する事が私たちの目的遂行のために重要です
+    1. リーダーノードにおけるチェーンは常に全ノードにおける新たなブロックの生成を取り込みます
+      - そのためリーダーノードのチェーンは常に最も長いチェーンの１つとなります
+    2- 全てのノードが最も長いチェーンに基づいてアップデートされます
 
-2. 比較のために、以下に全結合の場合のネットワークの形状示します
+- 比較のために、以下に全結合の場合のネットワークの形状示します
     - リーダーノードは他のノードと結合しているが、その他のノードはリーダーとのみ結合しています
     - 序列を持つ結合もそれぞれのノードは対等なノードで、現在の実装では結合の仕方が異なるのみです
     - 他方で、全結合の場合は全てのノード同士が結合しています
@@ -277,7 +277,7 @@ clear_output(True)
 print(s_uuid + ' は離着陸地点を予約しました' if sc.make_a_reservation(s) else s_uuid + ' は離着陸地点は予約できませんでした')
 ```
 
-    the_leader_node は離着陸地点を予約しました。
+    the_leader_node は離着陸地点を予約しました
 
 
 
@@ -309,7 +309,7 @@ clear_output(True)
 print(s_uuid + ' により離着陸地点の予約はキャンセルされました' if sc.cancel_reservation(s) else s_uuid + ' によっては離着陸地点はキャンセルできませんでした')
 ```
 
-    the_leader_node により離着陸地点の予約はキャンセルされました。
+    the_leader_node により離着陸地点の予約はキャンセルされました
 
 
 
@@ -342,7 +342,7 @@ clear_output(True)
 print(b_uuid + ' は離着陸地点を予約しました' if sc.make_a_reservation(b) else b_uuid + ' は離着陸地点は予約できませんでした')
 ```
 
-    the_blue_sky は離着陸地点を予約しました。
+    the_blue_sky は離着陸地点を予約しました
 
 
 
@@ -376,7 +376,7 @@ clear_output(True)
 print(b_uuid + ' により離着陸地点の予約はキャンセルされました' if sc.cancel_reservation(b) else b_uuid + ' によっては離着陸地点はキャンセルできませんでした')
 ```
 
-    the_blue_sky により離着陸地点の予約はキャンセルされました。
+    the_blue_sky により離着陸地点の予約はキャンセルされました
 
 
 
@@ -416,7 +416,7 @@ print('\n以下ブロックチェーンの現在のステート')
 print(sc.get_current_state(s_uuid))
 ```
 
-    the_blue_sky によっては離着陸地点はキャンセルできませんでした。
+    the_blue_sky によっては離着陸地点はキャンセルできませんでした
     
     以下ブロックチェーンの内容（トランザクションの履歴）
     0 {"sender_address": ["the_leader_node"], "receiver_address": [null], "value": "reservation", "sign": null}
@@ -429,7 +429,7 @@ print(sc.get_current_state(s_uuid))
 
 
 ### 履歴の確認
-- ブロックチェーンにおいて予測したとおりのトランザクションの履歴が確認できました
+- 許可型分散ブロックチェーンにおいて予測したとおりのトランザクションの履歴が確認できました
 
 
 ```python
