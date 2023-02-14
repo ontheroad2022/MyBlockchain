@@ -1,4 +1,4 @@
-Pythonによる許可型分散ブロックチェーンの実装
+Pythonによる許可型分散ブロックチェーンの実装（2023年1月）
 
 - [Jupyter Notebook](my_blockchain.ipynb)
 
